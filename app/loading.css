@@ -1,0 +1,116 @@
+/* app/loading.css */
+
+.loading-page {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 80px 0;
+}
+
+.loading-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Skeleton */
+.loading-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Skeleton Base */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-title {
+  height: 48px;
+  width: 300px;
+  margin: 0 auto 20px;
+}
+
+.skeleton-subtitle {
+  height: 24px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+/* Grid Skeleton */
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.loading-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 350px;
+}
+
+.loading-card-content {
+  padding: 25px;
+}
+
+.skeleton-badge {
+  height: 20px;
+  width: 80px;
+  margin-bottom: 15px;
+}
+
+.skeleton-name {
+  height: 24px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.skeleton-price {
+  height: 32px;
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.skeleton-button {
+  height: 48px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .skeleton-title {
+    width: 200px;
+  }
+
+  .skeleton-subtitle {
+    width: 280px;
+  }
+
+  .loading-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}

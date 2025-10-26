@@ -1,0 +1,132 @@
+/* app/error.css */
+
+.error-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  padding: 20px;
+}
+
+.error-content {
+  max-width: 500px;
+  text-align: center;
+  background: white;
+  padding: 60px 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.error-icon {
+  font-size: 5rem;
+  margin-bottom: 30px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.error-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.error-message {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #764ba2;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.error-details {
+  margin-top: 40px;
+  text-align: left;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.error-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #667eea;
+  margin-bottom: 10px;
+}
+
+.error-details pre {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  color: #ff4757;
+}
+
+@media (max-width: 576px) {
+  .error-content {
+    padding: 40px 30px;
+  }
+
+  .error-title {
+    font-size: 1.6rem;
+  }
+
+  .error-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
