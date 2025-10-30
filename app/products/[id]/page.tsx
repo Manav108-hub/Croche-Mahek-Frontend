@@ -20,14 +20,66 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const { id } = await params;
   const product = await fetchProduct(id);
   
-  const whatsappMessage = `Hi! I'm interested in: ${product.name}`;
-  const whatsappNumber = process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP || '+919876543210';
-  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
-
+  // Build detailed WhatsApp message
+  const effectivePrice = product.price?.discounted || product.price?.original || 0;
   const hasDiscount = product.price?.discounted != null && product.price.discounted < product.price.original;
   const discountPercent = hasDiscount 
     ? Math.round(((product.price.original - product.price.discounted!) / product.price.original) * 100)
     : 0;
+
+  // Create detailed message with all product info
+  let whatsappMessage = `🌸 *DRISHYAA - Product Inquiry* 🌸\n\n`;
+  whatsappMessage += `*Product:* ${product.name}\n`;
+  whatsappMessage += `*Category:* ${product.category?.name || 'N/A'}\n`;
+  whatsappMessage += `*Price:* ₹${effectivePrice}`;
+  
+  if (hasDiscount) {
+    whatsappMessage += ` (${discountPercent}% OFF)\n`;
+    whatsappMessage += `~~₹${product.price.original}~~`;
+  }
+  whatsappMessage += `\n\n`;
+
+  // Add description
+  if (product.description) {
+    whatsappMessage += `📝 ${product.description}\n\n`;
+  }
+
+  // Add specifications
+  if (product.specifications && Object.keys(product.specifications).length > 0) {
+    whatsappMessage += `*Specifications:*\n`;
+    Object.entries(product.specifications).forEach(([key, value]) => {
+      whatsappMessage += `▫️ ${key}: ${value}\n`;
+    });
+    whatsappMessage += `\n`;
+  }
+
+  // Add variants
+  if (product.variants && product.variants.length > 0) {
+    whatsappMessage += `*Available Options:*\n`;
+    product.variants.forEach((variant: any) => {
+      whatsappMessage += `▫️ ${variant.name}: ${variant.value}\n`;
+    });
+    whatsappMessage += `\n`;
+  }
+
+  // Add tags
+  if (product.tags && product.tags.length > 0) {
+    whatsappMessage += `*Tags:* ${product.tags.map((tag: string) => `#${tag}`).join(' ')}\n\n`;
+  }
+
+  // Add product URL for reference
+  whatsappMessage += `🔗 Link: ${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/products/${id}\n\n`;
+
+  // Add closing message
+  whatsappMessage += `━━━━━━━━━━━━━━━━\n\n`;
+  whatsappMessage += `I'm interested in ordering! Please share:\n\n`;
+  whatsappMessage += `✓ Availability & delivery time\n`;
+  whatsappMessage += `✓ Customization options\n`;
+  whatsappMessage += `✓ Payment methods (COD/UPI/Bank)\n\n`;
+  whatsappMessage += `Thank you! 💖`;
+
+  const whatsappNumber = process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP || '+919876543210';
+  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="girly-page">
@@ -69,7 +121,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               {/* Price */}
               <div className="product-detail-price">
                 <div className="price-current">
-                  ₹{product.price?.discounted || product.price?.original || 0}
+                  ₹{effectivePrice}
                 </div>
                 {hasDiscount && (
                   <>
@@ -182,7 +234,23 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <h3 className="footer-brand">DRISHYAA 🌸</h3>
+              <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className="footer-branding">
+                  <div className="footer-logo">
+                    <Image
+                      src="/logo-crochet.png"
+                      alt="DRISHYAA"
+                      width={70}
+                      height={70}
+                      className="footer-logo-img"
+                    />
+                  </div>
+                  <div className="footer-brand-text">
+                    <h3>DRISHYAA</h3>
+                    <p>Handmade with Love</p>
+                  </div>
+                </div>
+              </Link>
               <p className="footer-desc">
                 Handmade with love, crafted with care. Each piece is unique and special.
               </p>
