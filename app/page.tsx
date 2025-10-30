@@ -1,4 +1,4 @@
-// app/page.tsx
+// app/page.tsx (Redesigned with logo on left)
 import { fetchCategories, fetchFeaturedProducts } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import './girly-home.css';
 import WhatsAppFloat from './whatsapp-float';
 
 export const metadata = {
-  title: 'Handmade Crochet Treasures | Flowers, Bags & Keychains',
+  title: 'DRISHYAA - Handmade Crochet Treasures',
   description: 'Discover our beautiful collection of handcrafted crochet items',
 };
 
@@ -16,7 +16,6 @@ export default async function HomePage() {
 
   return (
     <div className="girly-homepage">
-      {/* Floating WhatsApp */}
       <WhatsAppFloat />
 
       {/* Hero Section */}
@@ -30,10 +29,28 @@ export default async function HomePage() {
         </div>
         
         <div className="hero-content">
-          <h1 className="hero-title">
+          {/* Logo + Brand Name Side by Side */}
+          <div className="hero-branding">
+            <div className="hero-logo">
+              <Image
+                src="/logo-crochet.png"
+                alt="DRISHYAA Logo"
+                width={150}
+                height={150}
+                className="hero-logo-img"
+                priority
+              />
+            </div>
+            <div className="hero-text-content">
+              <h1 className="brand-name">DRISHYAA</h1>
+              <p className="brand-tagline">Handmade with Love</p>
+            </div>
+          </div>
+
+          <h2 className="hero-title">
             <span className="title-line">Handcrafted</span>
             <span className="title-line highlight">with Love</span>
-          </h1>
+          </h2>
           <p className="hero-subtitle">
             Beautiful crochet creations for every moment
           </p>
@@ -97,35 +114,46 @@ export default async function HomePage() {
               <p>New collections coming soon!</p>
             </div>
           ) : (
-            <div className="categories-grid">
-              {categories.map((category, index) => (
-                <Link
-                  key={category._id}
-                  href={`/categories/${category.slug}`}
-                  className="category-card"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="category-image">
-                    {category.image?.url ? (
-                      <Image
-                        src={category.image.url}
-                        alt={category.name}
-                        fill
-                        className="cat-img"
-                      />
-                    ) : (
-                      <div className="category-placeholder">
-                        <span>🌺</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="category-overlay">
-                    <h3>{category.name}</h3>
-                    <span className="category-arrow">→</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <>
+              <div className="categories-grid">
+                {categories.slice(0, 6).map((category, index) => (
+                  <Link
+                    key={category._id}
+                    href={`/categories/${category.slug}`}
+                    className="category-card"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="category-image">
+                      {category.image?.url ? (
+                        <Image
+                          src={category.image.url}
+                          alt={category.name}
+                          fill
+                          className="cat-img"
+                        />
+                      ) : (
+                        <div className="category-placeholder">
+                          <span>🌺</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="category-overlay">
+                      <h3>{category.name}</h3>
+                      <span className="category-arrow">→</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {categories.length > 6 && (
+                <div className="view-all-container">
+                  <Link href="/categories" className="view-all-btn">
+                    View All Categories
+                    <span className="btn-sparkle">🌸</span>
+                  </Link>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -147,64 +175,66 @@ export default async function HomePage() {
               <p>Beautiful items coming soon!</p>
             </div>
           ) : (
-            <div className="products-grid">
-              {products.slice(0, 4).map((product, index) => {
-                const imageUrl = product.images?.[0]?.url;
-                const effectivePrice = product.price?.discounted || product.price?.original || 0;
-                const hasDiscount = product.price?.discounted && product.price.discounted < product.price.original;
+            <>
+              <div className="products-grid">
+                {products.slice(0, 4).map((product, index) => {
+                  const imageUrl = product.images?.[0]?.url;
+                  const effectivePrice = product.price?.discounted || product.price?.original || 0;
+                  const hasDiscount = product.price?.discounted && product.price.discounted < product.price.original;
 
-                return (
-                  <Link
-                    key={product._id}
-                    href={`/products/${product._id}`}
-                    className="product-card"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="product-image">
-                      {imageUrl ? (
-                        <Image
-                          src={imageUrl}
-                          alt={product.name}
-                          fill
-                          className="prod-img"
-                        />
-                      ) : (
-                        <div className="product-placeholder">
-                          <span>🌷</span>
-                        </div>
-                      )}
-                      {hasDiscount && (
-                        <span className="discount-badge">
-                          {Math.round(((product.price.original - (product.price.discounted || 0)) / product.price.original) * 100)}% OFF
-                        </span>
-                      )}
-                    </div>
-                    <div className="product-info">
-                      <span className="product-category">{product.category?.name}</span>
-                      <h3 className="product-name">{product.name}</h3>
-                      <div className="product-price">
-                        <span className="price-current">₹{effectivePrice}</span>
+                  return (
+                    <Link
+                      key={product._id}
+                      href={`/products/${product._id}`}
+                      className="product-card"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="product-image">
+                        {imageUrl ? (
+                          <Image
+                            src={imageUrl}
+                            alt={product.name}
+                            fill
+                            className="prod-img"
+                          />
+                        ) : (
+                          <div className="product-placeholder">
+                            <span>🌷</span>
+                          </div>
+                        )}
                         {hasDiscount && (
-                          <span className="price-original">₹{product.price.original}</span>
+                          <span className="discount-badge">
+                            {Math.round(((product.price.original - (product.price.discounted || 0)) / product.price.original) * 100)}% OFF
+                          </span>
                         )}
                       </div>
-                      <button className="product-btn">
-                        <span>View Details</span>
-                        <span>💖</span>
-                      </button>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+                      <div className="product-info">
+                        <span className="product-category">{product.category?.name}</span>
+                        <h3 className="product-name">{product.name}</h3>
+                        <div className="product-price">
+                          <span className="price-current">₹{effectivePrice}</span>
+                          {hasDiscount && (
+                            <span className="price-original">₹{product.price.original}</span>
+                          )}
+                        </div>
+                        <button className="product-btn">
+                          <span>View Details</span>
+                          <span>💖</span>
+                        </button>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
 
-          <div className="view-all-container">
-            <Link href="/products" className="view-all-btn">
-              View All Products
-              <span className="btn-sparkle">✨</span>
-            </Link>
-          </div>
+              <div className="view-all-container">
+                <Link href="/products" className="view-all-btn">
+                  View All Products
+                  <span className="btn-sparkle">✨</span>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -213,20 +243,37 @@ export default async function HomePage() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-col">
-              <h3 className="footer-title">Crochet Haven</h3>
+              {/* Logo + Brand in Footer */}
+              <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className="footer-branding">
+                  <div className="footer-logo">
+                    <Image
+                      src="/logo-crochet.png"
+                      alt="DRISHYAA"
+                      width={70}
+                      height={70}
+                      className="footer-logo-img"
+                    />
+                  </div>
+                  <div className="footer-brand-text">
+                    <h3>DRISHYAA</h3>
+                    <p>Handmade with Love</p>
+                  </div>
+                </div>
+              </Link>
               <p className="footer-text">
-                Handmade with love in India. Each piece tells a story of dedication and craftsmanship.
+                Each piece tells a story of dedication and craftsmanship.
               </p>
               <div className="social-links">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                {/* <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                   Facebook
                 </a>
                 <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">
                   Pinterest
-                </a>
+                </a> */}
               </div>
             </div>
 
@@ -244,7 +291,6 @@ export default async function HomePage() {
               <ul className="footer-links">
                 <li><Link href="/about">About Us</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
-                <li><Link href="/faq">FAQ</Link></li>
               </ul>
             </div>
 
@@ -253,9 +299,7 @@ export default async function HomePage() {
               <div className="payment-info">
                 <p><strong>Payment Methods:</strong></p>
                 <ul>
-                  <li>💵 Cash on Delivery</li>
                   <li>📱 UPI / PhonePe / GPay</li>
-                  <li>🏦 Bank Transfer</li>
                 </ul>
                 <p style={{ marginTop: '1rem' }}><strong>Order via WhatsApp</strong></p>
                 <p style={{ fontSize: '0.9rem', opacity: 0.8 }}>Quick response within 2 hours</p>
@@ -264,11 +308,11 @@ export default async function HomePage() {
           </div>
 
           <div className="footer-bottom">
-            <p>© 2025 Crochet Haven. Handcrafted with 💖 in India</p>
+            <p>© 2025 DRISHYAA. Handcrafted with 💖 in India</p>
             <div className="footer-legal">
               <Link href="/terms">Terms</Link>
               <Link href="/privacy">Privacy</Link>
-              <Link href="/shipping">Shipping</Link>
+              {/* <Link href="/shipping">Shipping</Link> */}
             </div>
           </div>
         </div>

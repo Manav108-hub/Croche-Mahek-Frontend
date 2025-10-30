@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const category = await fetchCategory(slug);
   return {
-    title: `${category.name} | Crochet Haven`,
+    title: `${category.name} | DRISHYAA`,
     description: `Browse our ${category.name} collection`,
   };
 }
@@ -115,7 +115,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <h3 className="footer-brand">Crochet Haven</h3>
+              <h3 className="footer-brand">DRISHYAA</h3>
               <p className="footer-desc">Handmade with love in India 💖</p>
             </div>
             <div className="footer-col">
@@ -136,7 +136,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </div>
           </div>
           <div className="footer-bottom">
-            <p>© 2025 Crochet Haven. Made with 💖</p>
+            <p>© 2025 DRISHYAA. Made with 💖</p>
           </div>
         </div>
       </footer>

@@ -5,7 +5,7 @@ import WhatsAppFloat from '@/app/whatsapp-float';
 import '../girly-pages.css';
 
 export const metadata = {
-  title: 'About Us | Crochet Haven',
+  title: 'About Us | DRISHYAA',
   description: 'Learn about our handmade crochet journey and passion',
 };
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
             <div className="about-section">
               <h2 className="section-heading">Our Story 🌺</h2>
               <p className="section-text">
-                Welcome to Crochet Haven, where every stitch tells a story! We're passionate about 
+                Welcome to DRISHYAA, where every stitch tells a story! We're passionate about 
                 creating beautiful, handmade crochet items that bring joy and warmth to your life. 
                 What started as a hobby has blossomed into a full-fledged creative journey, and 
                 we're so glad you're here to be part of it.
@@ -160,13 +160,12 @@ export default function AboutPage() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-col">
-              <h3 className="footer-title">Crochet Haven 🌸</h3>
+              <h3 className="footer-title">DRISHYAA 🌸</h3>
               <p className="footer-text">
                 Handmade with love, crafted with care. Each piece is unique and special.
               </p>
               <div className="social-links">
                 <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
               </div>
             </div>
 
@@ -190,7 +189,6 @@ export default function AboutPage() {
             <div className="footer-col">
               <h4 className="footer-heading">Payment & Support</h4>
               <div className="payment-info">
-                <p>💳 UPI, COD, Bank Transfer</p>
                 <p>📱 WhatsApp: {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}</p>
                 <p>⏰ Mon-Sat, 10 AM - 8 PM</p>
               </div>
@@ -198,7 +196,7 @@ export default function AboutPage() {
           </div>
 
           <div className="footer-bottom">
-            <p>© 2025 Crochet Haven. Handcrafted with 💖 in India</p>
+            <p>© 2025 DRISHYAA. Handcrafted with 💖 in India</p>
             <div className="footer-legal">
               <Link href="/terms">Terms</Link>
               <Link href="/privacy">Privacy</Link>

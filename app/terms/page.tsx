@@ -6,8 +6,8 @@ import './terms.css';
 import WhatsAppFloat from '../whatsapp-float';
 
 export const metadata = {
-  title: 'Terms & Conditions | Crochet Haven',
-  description: 'Terms and conditions for ordering from Crochet Haven',
+  title: 'Terms & Conditions | DRISHYAA',
+  description: 'Terms and conditions for ordering from DRISHYAA',
 };
 
 export default function TermsPage() {
@@ -38,7 +38,7 @@ export default function TermsPage() {
           <div className="content-card">
             
             <div className="terms-section">
-              <h2>🌸 Welcome to Crochet Haven</h2>
+              <h2>🌸 Welcome to DRISHYAA</h2>
               <p>
                 By placing an order with us, you agree to the following terms and conditions. 
                 We handcraft each item with love and care, and these terms help us maintain 
@@ -208,7 +208,7 @@ export default function TermsPage() {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <h3 className="footer-brand">Crochet Haven</h3>
+              <h3 className="footer-brand">DRISHYAA</h3>
               <p className="footer-desc">Handmade with love in India 💖</p>
             </div>
             <div className="footer-col">
@@ -229,7 +229,7 @@ export default function TermsPage() {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>© 2025 Crochet Haven. Made with 💖</p>
+            <p>© 2025 DRISHYAA. Made with 💖</p>
           </div>
         </div>
       </footer>

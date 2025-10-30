@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const product = await fetchProduct(id);
   return {
-    title: `${product.name} | Crochet Haven`,
+    title: `${product.name} | DRISHYAA`,
     description: product.description,
   };
 }
@@ -182,7 +182,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <h3 className="footer-brand">Crochet Haven 🌸</h3>
+              <h3 className="footer-brand">DRISHYAA 🌸</h3>
               <p className="footer-desc">
                 Handmade with love, crafted with care. Each piece is unique and special.
               </p>
@@ -208,7 +208,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
 
           <div className="footer-bottom">
-            <p>© 2025 Crochet Haven. Handcrafted with 💖 in India</p>
+            <p>© 2025 DRISHYAA. Handcrafted with 💖 in India</p>
           </div>
         </div>
       </footer>

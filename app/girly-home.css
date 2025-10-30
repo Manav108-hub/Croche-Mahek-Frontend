@@ -1,4 +1,4 @@
-/* app/girly-home.css - Beautiful Floral Design */
+/* app/girly-home.css - Beautiful Floral Design - COMPLETE FILE */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
 
@@ -90,6 +90,142 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ========== IMPROVED LOGO STYLES - PNG VERSION ========== */
+
+/* Hero Section Logo (Homepage) */
+.hero-branding {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+  animation: fadeInDown 1s ease-out;
+  justify-content: center;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-logo {
+  flex-shrink: 0;
+}
+
+.hero-logo-img {
+  width: 200px;
+  height: 200px;
+  /* Circular with floaty aesthetic */
+  border-radius: 50%;
+  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 229, 236, 0.8) 100%);
+  padding: 12px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 10px 30px rgba(255, 107, 157, 0.2));
+  object-fit: cover;
+  display: block;
+  /* Floaty animation */
+  animation: floatLogo 4s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+.hero-logo-img:hover {
+  transform: scale(1.1) translateY(-8px) rotate(5deg);
+  box-shadow: 0 30px 80px rgba(255, 107, 157, 0.5);
+  filter: drop-shadow(0 15px 40px rgba(255, 107, 157, 0.4)) 
+          drop-shadow(0 0 30px rgba(255, 182, 193, 0.6));
+}
+
+.hero-text-content {
+  flex: 1;
+  text-align: left;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  background: linear-gradient(135deg, var(--pink-dark) 0%, var(--purple-medium) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.brand-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  color: var(--pink-medium);
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Footer Logo */
+.footer-branding {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.footer-logo {
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: translateY(-3px);
+}
+
+.footer-logo-img {
+  width: 90px;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2));
+  object-fit: contain;
+  display: block;
+}
+
+.footer-logo:hover .footer-logo-img {
+  filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.4));
+  transform: scale(1.05);
+}
+
+.footer-brand-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  line-height: 1;
+}
+
+.footer-brand-text p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin: 0;
 }
 
 .hero-title {
@@ -579,14 +715,6 @@ body {
   min-width: 0;
 }
 
-.footer-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  min-height: 2rem;
-}
-
 .footer-text {
   line-height: 1.8;
   opacity: 0.9;
@@ -712,6 +840,29 @@ body {
 }
 
 /* ========== RESPONSIVE ========== */
+@media (max-width: 968px) {
+  .hero-branding {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text-content {
+    text-align: center;
+  }
+
+  .hero-logo-img {
+    width: 140px;
+  }
+
+  .brand-name {
+    font-size: 2.2rem;
+  }
+
+  .brand-tagline {
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-title {
     font-size: 3rem;
@@ -738,6 +889,15 @@ body {
     text-align: center;
   }
 
+  .footer-branding {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-logo-img {
+    width: 60px;
+  }
+
   .social-links {
     justify-content: center;
   }
@@ -753,6 +913,18 @@ body {
 }
 
 @media (max-width: 480px) {
+  .hero-logo-img {
+    width: 100px;
+  }
+
+  .brand-name {
+    font-size: 2rem;
+  }
+
+  .brand-tagline {
+    font-size: 1rem;
+  }
+
   .hero-title {
     font-size: 2.5rem;
   }
@@ -772,5 +944,9 @@ body {
 
   .product-image {
     height: 280px;
+  }
+
+  .footer-logo-img {
+    width: 50px;
   }
 }

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Crochet Haven - Handmade with Love',
+  title: 'DRISHYAA - Handmade with Love',
   description: 'Beautiful handcrafted crochet flowers, bags, and keychains',
   keywords: ['crochet', 'handmade', 'flowers', 'bags', 'keychains', 'gifts'],
 };
