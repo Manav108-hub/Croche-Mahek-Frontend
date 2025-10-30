@@ -75,7 +75,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   whatsappMessage += `I'm interested in ordering! Please share:\n\n`;
   whatsappMessage += `✓ Availability & delivery time\n`;
   whatsappMessage += `✓ Customization options\n`;
-  whatsappMessage += `✓ Payment methods (COD/UPI/Bank)\n\n`;
+  whatsappMessage += `✓ Payment methods (UPI)\n\n`;
   whatsappMessage += `Thank you! 💖`;
 
   const whatsappNumber = process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP || '+919876543210';

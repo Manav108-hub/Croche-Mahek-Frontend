@@ -1,5 +1,4 @@
-/* app/girly-pages.css - COMPLETE FILE - PART 1 of 2 */
-/* Copy this ENTIRE file, then add PART 2 below */
+/* app/girly-pages.css - COMPLETE FILE WITH RESPONSIVE FIXES */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
 
@@ -84,6 +83,8 @@
 .page-logo-img {
   width: 100px;
   height: 100px;
+  min-width: 100px;
+  min-height: 100px;
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 229, 236, 0.8) 100%);
@@ -232,6 +233,94 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   position: relative;
   z-index: 2;
+}
+
+/* ========== CATEGORIES GRID ========== */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.category-card {
+  position: relative;
+  height: 400px;
+  border-radius: 30px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: scaleIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.category-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(255, 107, 157, 0.4);
+}
+
+.category-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cat-img {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.category-card:hover .cat-img {
+  transform: scale(1.1);
+}
+
+.category-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--pink-medium) 0%, var(--purple-medium) 100%);
+  font-size: 6rem;
+}
+
+.category-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 40px;
+  color: white;
+}
+
+.category-overlay h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.category-arrow {
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-arrow {
+  transform: translateX(10px);
 }
 
 /* ========== PRODUCTS SECTION ========== */
@@ -497,6 +586,8 @@
 .footer-logo-img {
   width: 90px;
   height: 90px;
+  min-width: 90px;
+  min-height: 90px;
   border-radius: 50%;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 229, 236, 0.85) 100%);
   padding: 8px;
@@ -585,9 +676,6 @@
   font-size: 0.95rem;
   opacity: 0.9;
 }
-
-/* END OF PART 1 - Continue with PART 2 below */
-/* app/girly-pages.css - PART 2 of 2 - Add this AFTER Part 1 */
 
 /* ========== PRODUCT DETAIL PAGE ========== */
 
@@ -1057,6 +1145,32 @@
   .gallery-thumbnails {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  /* Fix header logo on tablet */
+  .page-logo-img {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+    object-fit: cover;
+  }
+
+  /* Fix footer logo on tablet */
+  .footer-logo-img {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+    object-fit: cover;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .category-card {
+    height: 350px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1072,9 +1186,14 @@
     gap: 15px;
   }
 
+  /* CRITICAL FIX: Keep logo perfectly circular on mobile */
   .page-logo-img {
     width: 70px;
     height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .header-brand-name {
@@ -1102,6 +1221,14 @@
     height: 300px;
   }
 
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .category-card {
+    height: 320px;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1110,11 +1237,17 @@
   .footer-branding {
     flex-direction: column;
     text-align: center;
+    align-items: center;
   }
 
+  /* CRITICAL FIX: Keep footer logo perfectly circular */
   .footer-logo-img {
     width: 70px;
     height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .values-grid,
@@ -1124,13 +1257,22 @@
 }
 
 @media (max-width: 576px) {
+  /* CRITICAL FIX: Small mobile - keep logo perfectly circular */
   .page-logo-img {
     width: 60px;
     height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .header-brand-name {
     font-size: 1.2rem;
+  }
+
+  .header-brand-tagline {
+    font-size: 0.75rem;
   }
 
   .page-title {
@@ -1143,6 +1285,14 @@
 
   .product-image {
     height: 280px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    height: 300px;
   }
 
   .product-detail-section {
@@ -1194,16 +1344,60 @@
     padding: 16px 32px;
   }
 
+  /* CRITICAL FIX: Footer logo on small mobile */
   .footer-logo-img {
     width: 60px;
     height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .section-heading {
     font-size: 1.8rem;
   }
+
+  /* Fix header on very small screens */
+  .header-logo-section {
+    gap: 10px;
+  }
 }
 
+/* Extra small screens (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .page-logo-img {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    min-height: 55px;
+    padding: 6px;
+  }
+
+  .footer-logo-img {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    min-height: 55px;
+    padding: 6px;
+  }
+
+  .header-brand-name {
+    font-size: 1rem;
+  }
+
+  .header-brand-tagline {
+    font-size: 0.7rem;
+  }
+
+  .category-card {
+    height: 280px;
+  }
+
+  .category-overlay h3 {
+    font-size: 1.5rem;
+  }
+}
 
 /* ========================= */
 /* 💖 ABOUT PAGE ENHANCEMENTS */
@@ -1263,15 +1457,6 @@
 }
 
 /* Why Choose Us - Features List */
-.features-list {
-  list-style: none;
-  padding: 0;
-  margin: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .feature-item {
   display: flex;
   align-items: center;
@@ -1336,47 +1521,6 @@
   font-size: 1.05rem;
   padding: 14px 36px;
   border-radius: 50px;
-}
-
-/* Responsive Tweaks */
-@media (max-width: 768px) {
-  .process-item {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .process-number {
-    margin-bottom: 10px;
-  }
-
-  .about-cta {
-    padding: 40px 20px;
-  }
-
-  .about-cta h2 {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .process-list {
-    gap: 25px;
-  }
-
-  .feature-item {
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .feature-icon {
-    font-size: 1.3rem;
-    padding: 8px;
-  }
-
-  .about-cta h2 {
-    font-size: 1.6rem;
-  }
 }
 
 /* ========================= */
@@ -1535,8 +1679,26 @@
   line-height: 1.5;
 }
 
-/* Responsive Tweaks */
+/* Responsive Tweaks for About/Contact */
 @media (max-width: 768px) {
+  .process-item {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .process-number {
+    margin-bottom: 10px;
+  }
+
+  .about-cta {
+    padding: 40px 20px;
+  }
+
+  .about-cta h2 {
+    font-size: 1.8rem;
+  }
+
   .contact-card {
     padding: 40px 25px;
   }
@@ -1556,6 +1718,24 @@
 }
 
 @media (max-width: 576px) {
+  .process-list {
+    gap: 25px;
+  }
+
+  .feature-item {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .feature-icon {
+    font-size: 1.3rem;
+    padding: 8px;
+  }
+
+  .about-cta h2 {
+    font-size: 1.6rem;
+  }
+
   .contact-card {
     padding: 35px 20px;
   }
@@ -1568,6 +1748,5 @@
     font-size: 1.6rem;
   }
 }
-
 
 /* END OF COMPLETE FILE */
