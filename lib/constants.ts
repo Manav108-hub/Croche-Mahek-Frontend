@@ -45,9 +45,7 @@ export const NAV_LINKS = [
 ];
 
 export const SOCIAL_LINKS = {
-  instagram: 'https://instagram.com/crochetstore',
-  facebook: 'https://facebook.com/crochetstore',
-  twitter: 'https://twitter.com/crochetstore',
+  instagram: 'https://instagram.com/drishyaa.co',
 };
 
 export const FOOTER_LINKS = {

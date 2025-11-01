@@ -300,7 +300,7 @@ export default function HomePage() {
                 Each piece tells a story of dedication and craftsmanship.
               </p>
               <div className="social-links">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/drishyaa.co" target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
               </div>
