@@ -100,18 +100,17 @@ export default function TermsPage() {
                 <li>All orders are shipped via trusted courier partners across India</li>
                 <li>Tracking details will be shared via WhatsApp once dispatched</li>
                 <li>International shipping is available on request</li>
-
               </ul>
             </div>
 
             <div className="terms-section">
-              <h3>🔄 6. Returns & Exchanges</h3>
+              <h3>🚫 6. No Return / No Exchange Policy</h3>
               <ul>
-                <li>Returns accepted within 7 days if item is damaged during shipping</li>
-                <li>Please share photos immediately if you receive a damaged item</li>
-                <li>Custom orders cannot be returned unless defective</li>
-                <li>Return shipping costs will be borne by us for damaged items</li>
-                <li>Refunds processed within 7-10 working days after receiving returned item</li>
+                <li>Since all our items are <strong>handmade and made to order</strong>, we follow a strict <strong>No Return, No Exchange policy</strong>.</li>
+                <li>Each product is thoroughly checked and packed with care before dispatch.</li>
+                <li>We do not accept cancellations or changes once the order has been placed and production has begun.</li>
+                <li>In case your product is damaged during transit, please reach out to us within 24 hours of delivery with photos, and we’ll assist you appropriately.</li>
+                <li>Our team will ensure a delightful experience and resolve genuine concerns with utmost care. 💝</li>
               </ul>
             </div>
 
