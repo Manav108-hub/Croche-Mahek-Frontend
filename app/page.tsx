@@ -1,18 +1,43 @@
-// app/page.tsx (Redesigned with logo on left)
-import { fetchCategories, fetchFeaturedProducts } from '@/lib/api';
+// app/page.tsx - CLIENT-SIDE VERSION (Always Fresh Data)
+'use client';
+
+import { useEffect, useState } from 'react';
+// import { fetchCategories, fetchFeaturedProducts } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 import './girly-home.css';
 import WhatsAppFloat from './whatsapp-float';
 
-export const metadata = {
-  title: 'DRISHYAA - Handmade Crochet Treasures',
-  description: 'Discover our beautiful collection of handcrafted crochet items',
-};
+export default function HomePage() {
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function HomePage() {
-  const categories = await fetchCategories();
-  const products = await fetchFeaturedProducts();
+  useEffect(() => {
+    async function loadData() {
+      try {
+        // Force fresh data by bypassing cache
+        const timestamp = Date.now();
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        
+        const [categoriesRes, productsRes] = await Promise.all([
+          fetch(`${apiUrl}/categories?t=${timestamp}`, { cache: 'no-store' }),
+          fetch(`${apiUrl}/products?featured=true&t=${timestamp}`, { cache: 'no-store' }),
+        ]);
+        
+        const categoriesData = await categoriesRes.json();
+        const productsData = await productsRes.json();
+        
+        setCategories(categoriesData.data || []);
+        setProducts(productsData.data || []);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
   return (
     <div className="girly-homepage">
@@ -108,7 +133,12 @@ export default async function HomePage() {
             </p>
           </div>
 
-          {categories.length === 0 ? (
+          {loading ? (
+            <div className="empty-state">
+              <span className="empty-icon">⏳</span>
+              <p>Loading categories...</p>
+            </div>
+          ) : categories.length === 0 ? (
             <div className="empty-state">
               <span className="empty-icon">🌸</span>
               <p>New collections coming soon!</p>
@@ -116,7 +146,7 @@ export default async function HomePage() {
           ) : (
             <>
               <div className="categories-grid">
-                {categories.slice(0, 6).map((category, index) => (
+                {categories.slice(0, 6).map((category: any, index: number) => (
                   <Link
                     key={category._id}
                     href={`/categories/${category.slug}`}
@@ -169,7 +199,12 @@ export default async function HomePage() {
             </p>
           </div>
 
-          {products.length === 0 ? (
+          {loading ? (
+            <div className="empty-state">
+              <span className="empty-icon">⏳</span>
+              <p>Loading products...</p>
+            </div>
+          ) : products.length === 0 ? (
             <div className="empty-state">
               <span className="empty-icon">🌼</span>
               <p>Beautiful items coming soon!</p>
@@ -177,7 +212,7 @@ export default async function HomePage() {
           ) : (
             <>
               <div className="products-grid">
-                {products.slice(0, 4).map((product, index) => {
+                {products.slice(0, 4).map((product: any, index: number) => {
                   const imageUrl = product.images?.[0]?.url;
                   const effectivePrice = product.price?.discounted || product.price?.original || 0;
                   const hasDiscount = product.price?.discounted && product.price.discounted < product.price.original;
@@ -268,12 +303,6 @@ export default async function HomePage() {
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
-                {/* <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                  Facebook
-                </a>
-                <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">
-                  Pinterest
-                </a> */}
               </div>
             </div>
 
@@ -312,7 +341,6 @@ export default async function HomePage() {
             <div className="footer-legal">
               <Link href="/terms">Terms</Link>
               <Link href="/privacy">Privacy</Link>
-              {/* <Link href="/shipping">Shipping</Link> */}
             </div>
           </div>
         </div>
