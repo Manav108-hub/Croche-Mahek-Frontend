@@ -36,12 +36,12 @@ export default function TermsPage() {
       <section className="content-section">
         <div className="container">
           <div className="content-card">
-            
+
             <div className="terms-section">
               <h2>🌸 Welcome to DRISHYAA</h2>
               <p>
-                By placing an order with us, you agree to the following terms and conditions. 
-                We handcraft each item with love and care, and these terms help us maintain 
+                By placing an order with us, you agree to the following terms and conditions.
+                We handcraft each item with love and care, and these terms help us maintain
                 the quality you deserve.
               </p>
             </div>
@@ -49,7 +49,7 @@ export default function TermsPage() {
             <div className="terms-section">
               <h3>💖 1. Made Fresh for You</h3>
               <p>
-                All our products are <strong>made to order</strong> and crafted fresh just for you! 
+                All our products are <strong>made to order</strong> and crafted fresh just for you!
                 This means:
               </p>
               <ul>
@@ -77,9 +77,7 @@ export default function TermsPage() {
               <h3>💳 3. Payment Methods</h3>
               <p>We accept the following payment methods:</p>
               <ul>
-                <li><strong>Cash on Delivery (COD)</strong> - Pay when you receive your order</li>
                 <li><strong>UPI</strong> - PhonePe, GPay, Paytm, etc.</li>
-                <li><strong>Bank Transfer</strong> - Direct bank deposit</li>
                 <li><strong>Advance Payment</strong> - 50% advance may be required for custom orders</li>
               </ul>
             </div>
@@ -97,12 +95,12 @@ export default function TermsPage() {
             <div className="terms-section">
               <h3>📦 5. Shipping & Delivery</h3>
               <ul>
-                <li>Free shipping on orders above ₹999</li>
-                <li>Shipping charges apply for orders below ₹999</li>
-                <li>We ship across India via trusted courier partners</li>
-                <li>Tracking details will be shared via WhatsApp</li>
-                <li>Delivery time: 15-20 working days (production) + 3-5 days (shipping)</li>
-                <li>International shipping available on request</li>
+                <li>Shipping charges are applied to all orders</li>
+                <li>We handcraft every product fresh after your order — delivery takes 15-20 days</li>
+                <li>All orders are shipped via trusted courier partners across India</li>
+                <li>Tracking details will be shared via WhatsApp once dispatched</li>
+                <li>International shipping is available on request</li>
+
               </ul>
             </div>
 
@@ -181,10 +179,10 @@ export default function TermsPage() {
             <div className="terms-section cta-section">
               <h3>🌸 Questions?</h3>
               <p>
-                If you have any questions about our terms, feel free to contact us on WhatsApp. 
+                If you have any questions about our terms, feel free to contact us on WhatsApp.
                 We're here to help make your shopping experience delightful!
               </p>
-              <a 
+              <a
                 href={`https://wa.me/${process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP?.replace(/[^0-9]/g, '') || '919876543210'}?text=${encodeURIComponent('Hi! I have a question about your Terms & Conditions')}`}
                 target="_blank"
                 rel="noopener noreferrer"

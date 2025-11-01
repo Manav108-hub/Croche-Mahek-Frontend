@@ -1,17 +1,36 @@
-// app/products/page.tsx (Redesigned with proper header)
+// app/products/page.tsx - FULL CODE WITH WORKING MOBILE MENU
+'use client';
+
+import { useEffect, useState } from 'react';
 import { fetchProducts } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 import '../girly-pages.css';
 import WhatsAppFloat from '../whatsapp-float';
 
-export const metadata = {
-  title: 'All Products | DRISHYAA',
-  description: 'Browse our complete collection of handmade crochet items',
-};
+export default function ProductsPage() {
+  const [products, setProducts] = useState<any[]>([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-export default async function ProductsPage() {
-  const products = await fetchProducts();
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProducts();
+  }, []);
+
+  // Close mobile menu when clicking on a link
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="girly-page">
@@ -27,7 +46,7 @@ export default async function ProductsPage() {
         <div className="container">
           {/* Header with Logo on Left */}
           <div className="header-content">
-            <Link href="/" className="header-logo-section">
+            <Link href="/" className="header-logo-section" onClick={handleLinkClick}>
               <Image
                 src="/logo-crochet.png"
                 alt="DRISHYAA"
@@ -41,15 +60,21 @@ export default async function ProductsPage() {
               </div>
             </Link>
 
-            <nav className="header-nav">
-              <Link href="/" className="nav-link">Home</Link>
-              <Link href="/products" className="nav-link">Products</Link>
-              <Link href="/categories" className="nav-link">Categories</Link>
-              <Link href="/about" className="nav-link">About</Link>
-              <Link href="/contact" className="nav-link">Contact</Link>
+            <nav className={`header-nav ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+              <Link href="/" className="nav-link" onClick={handleLinkClick}>Home</Link>
+              <Link href="/products" className="nav-link" onClick={handleLinkClick}>Products</Link>
+              <Link href="/categories" className="nav-link" onClick={handleLinkClick}>Categories</Link>
+              <Link href="/about" className="nav-link" onClick={handleLinkClick}>About</Link>
+              <Link href="/contact" className="nav-link" onClick={handleLinkClick}>Contact</Link>
             </nav>
 
-            <button className="mobile-menu-btn">☰</button>
+            <button 
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
           </div>
 
           {/* Page Title Section */}
@@ -68,7 +93,13 @@ export default async function ProductsPage() {
       {/* Products Grid */}
       <section className="products-section">
         <div className="container">
-          {products.length === 0 ? (
+          {loading ? (
+            <div className="empty-state">
+              <span className="empty-icon">⏳</span>
+              <h2>Loading...</h2>
+              <p>Fetching beautiful items for you!</p>
+            </div>
+          ) : products.length === 0 ? (
             <div className="empty-state">
               <span className="empty-icon">🌷</span>
               <h2>No Products Yet</h2>
@@ -76,7 +107,7 @@ export default async function ProductsPage() {
             </div>
           ) : (
             <div className="products-grid">
-              {products.map((product, index) => {
+              {products.map((product: any, index: number) => {
                 const imageUrl = product.images?.[0]?.url;
                 const effectivePrice = product.price?.discounted || product.price?.original || 0;
                 const hasDiscount = product.price?.discounted && product.price.discounted < product.price.original;

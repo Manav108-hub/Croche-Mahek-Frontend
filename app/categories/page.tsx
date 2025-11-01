@@ -1,14 +1,11 @@
-// app/categories/page.tsx
-import { Metadata } from 'next';
+// app/categories/page.tsx - FULL CODE WITH WORKING MOBILE MENU
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import '../girly-pages.css';
 import WhatsAppFloat from '../whatsapp-float';
-
-export const metadata: Metadata = {
-  title: 'Categories | DRISHYAA - Handmade Crochet',
-  description: 'Browse all crochet product categories',
-};
 
 async function getCategories() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
@@ -20,8 +17,29 @@ async function getCategories() {
   return data.data;
 }
 
-export default async function CategoriesPage() {
-  const categories = await getCategories();
+export default function CategoriesPage() {
+  const [categories, setCategories] = useState([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error loading categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadCategories();
+  }, []);
+
+  // Close mobile menu when clicking on a link
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="girly-page">
@@ -37,7 +55,7 @@ export default async function CategoriesPage() {
 
         <div className="container">
           <div className="header-content">
-            <Link href="/" className="header-logo-section">
+            <Link href="/" className="header-logo-section" onClick={handleLinkClick}>
               <Image
                 src="/logo-crochet.png"
                 alt="DRISHYAA"
@@ -51,14 +69,32 @@ export default async function CategoriesPage() {
               </div>
             </Link>
 
-            <nav className="header-nav">
-              <Link href="/" className="nav-link">Home</Link>
-              <Link href="/products" className="nav-link">Products</Link>
-              <Link href="/categories" className="nav-link">Categories</Link>
-              <Link href="/contact" className="nav-link">Contact</Link>
+            <nav className={`header-nav ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+              <Link href="/" className="nav-link" onClick={handleLinkClick}>Home</Link>
+              <Link href="/products" className="nav-link" onClick={handleLinkClick}>Products</Link>
+              <Link href="/categories" className="nav-link" onClick={handleLinkClick}>Categories</Link>
+              <Link href="/about" className="nav-link" onClick={handleLinkClick}>About</Link>
+              <Link href="/contact" className="nav-link" onClick={handleLinkClick}>Contact</Link>
             </nav>
 
-            <button className="mobile-menu-btn">☰</button>
+            <button 
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
+
+          {/* Page Title Section */}
+          <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: '40px' }}>
+            <h2 className="page-title">Our Collections</h2>
+            <p className="page-subtitle">
+              Explore our beautiful categories of handmade crochet items
+            </p>
+            <div className="products-count">
+              {categories.length} {categories.length === 1 ? 'category' : 'categories'}
+            </div>
           </div>
         </div>
       </header>
@@ -66,7 +102,13 @@ export default async function CategoriesPage() {
       {/* Categories Grid */}
       <section className="products-section">
         <div className="container">
-          {categories.length === 0 ? (
+          {loading ? (
+            <div className="empty-state">
+              <span className="empty-icon">⏳</span>
+              <h2>Loading...</h2>
+              <p>Fetching beautiful categories for you!</p>
+            </div>
+          ) : categories.length === 0 ? (
             <div className="empty-state">
               <span className="empty-icon">🌸</span>
               <h2>No Categories Yet</h2>
@@ -150,9 +192,7 @@ export default async function CategoriesPage() {
             <div className="footer-col">
               <h4>Payment Methods</h4>
               <ul>
-                <li>💵 Cash on Delivery</li>
                 <li>📱 UPI / PhonePe / GPay</li>
-                <li>🏦 Bank Transfer</li>
               </ul>
             </div>
           </div>
